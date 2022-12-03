@@ -1,5 +1,5 @@
-import getCards from '../api/cardData';
-import { showCards } from '../api/cards';
+import { getCards, languageCards, techCards } from '../api/cardData';
+import showCards from '../pages/cards';
 import { signOut } from '../utils/auth';
 
 const navigationEvents = () => {
@@ -7,8 +7,18 @@ const navigationEvents = () => {
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
   // ALL CARDS
-  document.querySelector('#all-books').addEventListener('click', () => {
+  document.querySelector('#all-cards').addEventListener('click', () => {
     getCards().then(showCards);
+  });
+  // Language Cards
+  document.querySelector('#language-cards').addEventListener('click', () => {
+    console.warn('CLICKED SALE BOOKS');
+    languageCards().then(showCards);
+  });
+  // Tech Cards
+  document.querySelector('#tech-cards').addEventListener('click', () => {
+    console.warn('CLICKED SALE BOOKS');
+    techCards().then(showCards);
   });
 };
 export default navigationEvents;
