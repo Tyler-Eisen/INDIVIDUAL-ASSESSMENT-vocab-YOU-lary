@@ -60,9 +60,38 @@ const getCardDetails = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// Create a New Card //
+const createCard = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Vocab.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+// Update a Card//
+const updateCard = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Vocab/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
 export {
   getCards,
   languageCards,
   techCards,
-  getCardDetails
+  getCardDetails,
+  createCard,
+  updateCard
 };
