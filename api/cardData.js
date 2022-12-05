@@ -6,8 +6,8 @@ const endpoint = client.databaseURL;
 
 // GET CARDS
 
-const getCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/Vocab.json`, {
+const getCards = (userId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Vocab.json?orderBy="uid"&equalTo="${userId}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

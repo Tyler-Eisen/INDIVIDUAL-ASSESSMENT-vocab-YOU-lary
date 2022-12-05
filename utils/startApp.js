@@ -4,21 +4,18 @@ import showCards from '../pages/cards';
 import navBar from '../components/shared/navBar';
 import navigationEvents from '../events/navigationEvents';
 import {
-  getCards, languageCards, techCards, deleteCard
+  getCards
 } from '../api/cardData';
 import domEvents from '../events/domEvents';
 import formEvents from '../events/formEvents';
 
-const startApp = () => {
-  domBuilder();
-  domEvents();
+const startApp = (user) => {
+  domBuilder(user.uid);
+  domEvents(user.uid);
+  formEvents(user.uid);
   navBar();
-  languageCards();
-  techCards();
   logoutButton();
   navigationEvents();
-  deleteCard();
-  formEvents();
-  getCards().then((cards) => showCards(cards));
+  getCards(user.uid).then((cards) => showCards(cards));
 };
 export default startApp;

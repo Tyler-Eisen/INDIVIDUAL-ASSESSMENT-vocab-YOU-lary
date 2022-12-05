@@ -1,7 +1,7 @@
 import { createCard, updateCard, getCards } from '../api/cardData';
 import showCards from '../pages/cards';
 
-const formEvents = () => {
+const formEvents = (userId) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING CARD
@@ -11,13 +11,13 @@ const formEvents = () => {
         title: document.querySelector('#title').value,
         category: document.querySelector('#category').value,
         definition: document.querySelector('#definition').value,
-
+        uid: userId,
       };
       createCard(payload).then(({ name }) => {
         console.warn(name);
         const patchPayload = { firebaseKey: name };
         updateCard(patchPayload).then(() => {
-          getCards().then(showCards);
+          getCards(userId).then(showCards);
         });
       });
     }
@@ -33,7 +33,7 @@ const formEvents = () => {
       };
       console.warn(payload);
       updateCard(payload).then(() => {
-        getCards().then(showCards);
+        getCards(userId).then(showCards);
       });
     }
   });

@@ -3,7 +3,7 @@ import viewCard from '../pages/viewCard';
 import addCardForm from '../components/Forms/addCardForm';
 import showCards from '../pages/cards';
 
-const domEvents = () => {
+const domEvents = (userId) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
     // Get Card Details //
     if (e.target.id.includes('view-card-btn')) {
@@ -31,7 +31,7 @@ const domEvents = () => {
         console.warn(e.target.id.split('--'));
         const [, firebaseKey] = e.target.id.split('--');
         deleteCard(firebaseKey).then(() => {
-          getCards().then(showCards);
+          getCards(userId).then(showCards);
         });
       }
     }
