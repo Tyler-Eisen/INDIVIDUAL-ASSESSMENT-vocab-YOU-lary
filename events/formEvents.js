@@ -2,10 +2,10 @@ import { createCard, updateCard, getCards } from '../api/cardData';
 import showCards from '../pages/cards';
 
 const formEvents = () => {
-  document.querySelector('#form-container').addEventListener('submit', (e) => {
+  document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING CARD
-    if (e.target.id.includes('submit-card-btn')) {
+    if (e.target.id.includes('submit-card')) {
       console.warn('CLICKED SUBMIT CARD', e.target.id);
       const payload = {
         title: document.querySelector('#title').value,
@@ -19,6 +19,21 @@ const formEvents = () => {
         updateCard(patchPayload).then(() => {
           getCards().then(showCards);
         });
+      });
+    }
+    // For UPDATING A CARD
+    if (e.target.id.includes('update-card')) {
+      console.warn('CLICKED UPDATE CARD', e.target.id);
+      const [, firebaseKey] = e.target.id.split('--');
+      const payload = {
+        title: document.querySelector('#title').value,
+        category: document.querySelector('#category').value,
+        definition: document.querySelector('#definition').value,
+        firebaseKey,
+      };
+      console.warn(payload);
+      updateCard(payload).then(() => {
+        getCards().then(showCards);
       });
     }
   });

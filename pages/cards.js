@@ -1,8 +1,8 @@
-// import clearDom from '../utils/clearDom';
+import clearDom from '../utils/clearDom';
 import renderToDOM from '../utils/renderToDom';
 
 const showCards = (arr) => {
-  // clearDom();
+  clearDom();
 
   let cardString = '';
   arr.forEach((item) => {
@@ -15,7 +15,8 @@ const showCards = (arr) => {
     ${item.definition} 
     <br>${item.dateSubmitted}</br></div>
     <i class="btn btn-success fas fa-eye" id="view-card-btn--${item.firebaseKey}"></i>
-    <i id="edit-card-btn--${item.firebaseKey}" class="fas fa-edit btn btn-info"></i>`;
+    <i id="edit-card-btn--${item.firebaseKey}" class="fas fa-edit btn btn-info"></i>
+    <i id="delete-card-btn--${item.firebaseKey}" class="btn btn-danger fas fa-trash-alt"></i>`;
     renderToDOM('#store', cardString);
   });
 };

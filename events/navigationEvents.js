@@ -12,12 +12,12 @@ const navigationEvents = () => {
   });
   // Language Cards
   document.querySelector('#language-cards').addEventListener('click', () => {
-    console.warn('CLICKED SALE BOOKS');
+    // console.warn('CLICKED SALE BOOKS');
     languageCards().then(showCards);
   });
   // Tech Cards
   document.querySelector('#tech-cards').addEventListener('click', () => {
-    console.warn('CLICKED SALE BOOKS');
+    // console.warn('CLICKED SALE BOOKS');
     techCards().then(showCards);
   });
 };

@@ -1,9 +1,9 @@
 const renderToDOM = (divId, content) => {
   const selectedDiv = document.querySelector(divId);
-  console.warn(selectedDiv);
-  console.warn(content);
+  // console.warn(selectedDiv);
+  // console.warn(content);
   selectedDiv.innerHTML = content;
-  console.warn(selectedDiv);
+  // console.warn(selectedDiv);
 };
 
 export default renderToDOM;

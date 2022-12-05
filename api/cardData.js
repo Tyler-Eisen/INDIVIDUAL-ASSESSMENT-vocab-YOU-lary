@@ -23,7 +23,7 @@ const getCards = () => new Promise((resolve, reject) => {
 
 // Fiter Language Cards //
 const languageCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/Vocab.json?orderBy="language"&equalTo=true`, {
+  fetch(`${endpoint}/Vocab.json?orderBy="category"&equalTo="Language"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const languageCards = () => new Promise((resolve, reject) => {
 
 // Filter Tech Cards//
 const techCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/Vocab.json?orderBy="tech"&equalTo=true`, {
+  fetch(`${endpoint}/Vocab.json?orderBy="category"&equalTo="Tech"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -87,11 +87,31 @@ const updateCard = (payload) => new Promise((resolve, reject) => {
     .then(resolve)
     .catch(reject);
 });
+// Delete Card
+const deleteCard = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Vocab/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'applications/json'
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getCards,
   languageCards,
   techCards,
   getCardDetails,
   createCard,
-  updateCard
+  updateCard,
+  deleteCard
 };

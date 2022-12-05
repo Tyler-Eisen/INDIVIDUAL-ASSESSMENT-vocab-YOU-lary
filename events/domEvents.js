@@ -1,6 +1,7 @@
-import { getCardDetails } from '../api/cardData';
+import { getCardDetails, deleteCard, getCards } from '../api/cardData';
 import viewCard from '../pages/viewCard';
 import addCardForm from '../components/Forms/addCardForm';
+import showCards from '../pages/cards';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -13,7 +14,7 @@ const domEvents = () => {
       getCardDetails(firebaseKey).then(viewCard);
     }
     // Form for adding a Card //
-    if (e.target.id.includes('add-card-btn')) {
+    if (e.target.id.includes('add-card')) {
       console.warn('ADD CARD');
       addCardForm();
     }
@@ -21,6 +22,18 @@ const domEvents = () => {
     if (e.target.id.includes('edit-card-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       getCardDetails(firebaseKey).then((word) => addCardForm(word));
+    }
+    //  CLICK EVENT FOR DELETING A CARD
+    if (e.target.id.includes('delete-card-btn')) {
+      // eslint-disable-next-line no-alert
+      if (window.confirm('Want to delete?')) {
+        console.warn('DELETE CARD', e.target.id);
+        console.warn(e.target.id.split('--'));
+        const [, firebaseKey] = e.target.id.split('--');
+        deleteCard(firebaseKey).then(() => {
+          getCards().then(showCards);
+        });
+      }
     }
   });
 };
