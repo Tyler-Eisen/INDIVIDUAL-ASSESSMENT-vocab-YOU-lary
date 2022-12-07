@@ -15,7 +15,8 @@ const startApp = (user) => {
   formEvents(user.uid);
   navBar();
   logoutButton();
-  navigationEvents();
+  navigationEvents(user.uid);
+
   getCards(user.uid).then((cards) => showCards(cards));
 };
 export default startApp;

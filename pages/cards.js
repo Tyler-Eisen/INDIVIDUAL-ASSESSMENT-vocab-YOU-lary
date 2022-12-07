@@ -3,12 +3,10 @@ import renderToDOM from '../utils/renderToDom';
 
 const showCards = (arr) => {
   clearDom();
-
+  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-card-btn">Add A Card</button>';
+  renderToDOM('#add-button', btnString);
   let cardString = '';
   arr.forEach((item) => {
-    const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-card-btn">Add A Card</button>';
-    renderToDOM('#add-button', btnString);
-
     cardString += `<div class="card">
    <h1>${item.title} </h1>
    <h2>Category: ${item.category}</h2>

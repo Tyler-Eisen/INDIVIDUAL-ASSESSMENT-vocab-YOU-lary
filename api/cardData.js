@@ -22,28 +22,28 @@ const getCards = (userId) => new Promise((resolve, reject) => {
 });
 
 // Fiter Language Cards //
-const languageCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/Vocab.json?orderBy="category"&equalTo="Language"`, {
+const languageCards = (userId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Vocab.json?orderBy="uid"&equalTo="${userId}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve(Object.values(data).filter((item) => item.category === 'Language')))
     .catch(reject);
 });
 
 // Filter Tech Cards//
-const techCards = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/Vocab.json?orderBy="category"&equalTo="Tech"`, {
+const techCards = (userId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/Vocab.json?orderBy="uid"&equalTo="${userId}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve(Object.values(data).filter((item) => item.category === 'Tech')))
     .catch(reject);
 });
 
